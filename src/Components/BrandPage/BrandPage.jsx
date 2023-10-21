@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import BrandSlider from "./BrandSlider/BrandSlider";
+import ProductSlider from "./ProductSlider/ProductSlider";
+import ProductCards from "./ProductCards/ProductCards";
 
 const BrandPage = () => {
   let Brand = useParams().brand;
@@ -31,12 +32,9 @@ const BrandPage = () => {
       {loading ? (
         <p className="text-center text-gray-500">Loading...</p>
       ) : (
-        <div>
-          <h1>{Brand}</h1>
-                      <div>{brandData.length}</div>
-                      <BrandSlider></BrandSlider>
-        </div>
+        <ProductSlider Brand={Brand} brandData={brandData}></ProductSlider>
       )}
+      <ProductCards brandData={brandData}></ProductCards>
     </div>
   );
 };
