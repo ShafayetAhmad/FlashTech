@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
 const LoginUser = () => {
   const { logInUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
   const { googleLogIn } = useContext(AuthContext);
   const [loginError, setLoginError] = useState(null);
 
@@ -15,6 +16,7 @@ const LoginUser = () => {
     try {
       await googleLogIn();
       console.log("Login successful");
+      console.log(location.state);
       navigate(location?.state ? location.state : "/");
     } catch (error) {
       setLoginError(
@@ -33,7 +35,7 @@ const LoginUser = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        navigate("/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -47,9 +49,7 @@ const LoginUser = () => {
       <section>
         <div className="py-4">
           <div className="mx-auto max-w-xl bg-[#f2f2f7] px-5 py-12 text-center md:px-10">
-            <h2 className="text-3xl font-bold mb-4 md:text-5xl">
-              Login Now
-            </h2>
+            <h2 className="text-3xl font-bold mb-4 md:text-5xl">Login Now</h2>
 
             <button
               onClick={handleGoogleSignIn}
@@ -141,7 +141,7 @@ const LoginUser = () => {
                 to={"/register"}
                 className="font-[Montserrat,_sans-serif] text-sm font-bold text-black"
               >
-                Register Now 
+                Register Now
               </Link>
             </p>
           </div>

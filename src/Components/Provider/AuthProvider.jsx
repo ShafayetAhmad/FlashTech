@@ -2,10 +2,12 @@
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import auth from "../../Firebase/firebase.config";
 import { toast } from "react-toastify";
 
@@ -69,6 +71,30 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const userLogOut = () => {
+    setLoading(true);
+    signOut(auth)
+      .then(() => {
+        showToast("Logged Out");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log("user in the auth state changed", currentUser);
+      
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => {
+      unSubscribe();
+    };
+  }, []);
   return (
     <AuthContext.Provider
       value={{
@@ -77,6 +103,7 @@ const AuthProvider = ({ children }) => {
         googleLogIn,
         loading,
         logInUser,
+        userLogOut,
       }}
     >
       {children}

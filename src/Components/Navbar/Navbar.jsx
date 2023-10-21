@@ -3,38 +3,47 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
-    const { user } = useContext(AuthContext);
-    console.log(user);
+  const { user, userLogOut } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    userLogOut();
+  };
+
   const navLinks = (
     <>
       <li className="text-xl">
         <NavLink to="/">Home</NavLink>
       </li>
       <li className="text-xl">
-        <NavLink to="events">Events</NavLink>
+        <NavLink to="add-product">Add Product</NavLink>
       </li>
       <li className="text-xl">
-        <NavLink to="/services">Services</NavLink>
+        <NavLink to="/my-cart">MyCart</NavLink>
       </li>
-      <li className="text-xl">
-        <NavLink to="/blogs">Blogs</NavLink>
-      </li>
-      <li className="text-xl">
-        <NavLink to="/about-us">About Us</NavLink>
-      </li>
-      <li className="text-xl">
-        <NavLink to="/contact-us">Contact Us</NavLink>
-      </li>
+      {user ? (
+        <li className="text-xl rounded-3xl font-semibold">
+          <button className="btn-success font-semibold" onClick={handleSignOut}>
+            <NavLink to="/">LogOut</NavLink>
+          </button>
+        </li>
+      ) : (
+        <li className="text-xl btn-info rounded-3xl font-semibold">
+          <button onClick={handleSignOut}>
+            <NavLink to="/login">LogIn/SignUp</NavLink>
+          </button>
+        </li>
+      )}
     </>
   );
 
   const userLinks = (
     <>
       {user ? (
-        <div className="navbar-end">
+        <div className="navbar-end text-lg">
           <p className="mr-4">
             Hey, {user.displayName ? user.displayName : "Member"}
           </p>
+          <li className="text-xl justify-between"></li>
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
@@ -63,7 +72,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li>
-                <button >
+                <button onClick={handleSignOut}>
                   <NavLink to="/" className="text-xl justify-between">
                     Logout
                   </NavLink>
@@ -73,11 +82,7 @@ const Navbar = () => {
           </div>
         </div>
       ) : (
-        <div className="navbar-end">
-          <p className="mr-4">
-            Hey, Alien.
-            <br /> Please Login ➡️
-          </p>
+        <div className="navbar-end text-lg">
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
@@ -135,10 +140,14 @@ const Navbar = () => {
             {navLinks}
           </ul>
         </div>
-          <Link to={"/"}>
-            {" "}
-            <img className="lg:w-44 w-24" src="https://i.ibb.co/R2xCPnN/flashtechlogo.png"></img>
-          </Link>
+        <Link to={"/"}>
+          {" "}
+          <img
+            className="lg:w-44 w-24"
+            src="https://i.ibb.co/R2xCPnN/flashtechlogo.png"
+            alt="logo"
+          ></img>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>

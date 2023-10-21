@@ -90,7 +90,7 @@ const RegisterUser = () => {
           .then((data) => {
             console.log(data);
           });
-        // navigate("/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         const errorCode = error.code;
