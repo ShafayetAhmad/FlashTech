@@ -28,13 +28,14 @@ const BrandPage = () => {
   }, [Brand]);
 
   return (
-    <div>
+      <div>
+          
       {loading ? (
         <p className="text-center text-gray-500">Loading...</p>
       ) : (
         <ProductSlider Brand={Brand} brandData={brandData}></ProductSlider>
       )}
-      <ProductCards brandData={brandData}></ProductCards>
+      <ProductCards brandData={brandData} loading={loading}></ProductCards>
     </div>
   );
 };
