@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const BrandsGallery = () => {
   const [brands, setBrands] = useState([]);
@@ -33,18 +34,20 @@ const BrandsGallery = () => {
             key={brand.id}
             className="w-full p-2 transition-transform transform hover:scale-110 hover:bg-gray-400"
           >
-            <div className="rounded-lg overflow-hidden shadow-lg bg-white">
-              <img
-                src={brand.BrandImage}
-                alt={brand.BrandName}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <div className="text-2xl font-bold mb-2 text-center">
-                  {brand.BrandName}
+            <Link to={`brand-Product/${brand.BrandName}`}>
+              <div className="rounded-lg overflow-hidden shadow-lg bg-white">
+                <img
+                  src={brand.BrandImage}
+                  alt={brand.BrandName}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <div className="text-2xl font-bold mb-2 text-center">
+                    {brand.BrandName}
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         ))
       )}

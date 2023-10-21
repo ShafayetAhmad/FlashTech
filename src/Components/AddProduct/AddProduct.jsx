@@ -2,13 +2,13 @@ import { useState } from "react";
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
-    image: "",
-    name: "",
-    brand: "",
-    type: "",
-    price: "",
-    description: "",
-    rating: "",
+    ProductImage: "",
+    ProductName: "",
+    BrandName: "",
+    ProductType: "",
+    ProductPrice: "",
+    ProductDescription: "",
+    ProductRating: "",
   });
 
   const handleChange = (e) => {
@@ -18,7 +18,6 @@ const AddProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your logic to handle the form submission (e.g., API call)
 
     fetch("http://localhost:5000/addNewProduct", {
       method: "POST",
@@ -36,13 +35,13 @@ const AddProduct = () => {
 
     // Reset the form after submission
     setProduct({
-      image: "",
-      name: "",
-      brand: "",
-      type: "",
-      price: "",
-      description: "",
-      rating: "",
+      ProductImage: "",
+      ProductName: "",
+      BrandName: "",
+      ProductType: "",
+      ProductPrice: "",
+      ProductDescription: "",
+      ProductRating: "",
     });
   };
 
@@ -53,16 +52,16 @@ const AddProduct = () => {
         {/* Image */}
         <div className="mb-4">
           <label
-            htmlFor="image"
+            htmlFor="ProductImage"
             className="block text-sm font-medium text-gray-700"
           >
             Image URL
           </label>
           <input
             type="text"
-            id="image"
-            name="image"
-            value={product.image}
+            id="ProductImage"
+            name="ProductImage"
+            value={product.ProductImage}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             required
@@ -72,16 +71,16 @@ const AddProduct = () => {
         {/* Name */}
         <div className="mb-4">
           <label
-            htmlFor="name"
+            htmlFor="ProductName"
             className="block text-sm font-medium text-gray-700"
           >
             Name
           </label>
           <input
             type="text"
-            id="name"
-            name="name"
-            value={product.name}
+            id="ProductName"
+            name="ProductName"
+            value={product.ProductName}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             required
@@ -91,38 +90,16 @@ const AddProduct = () => {
         {/* Brand */}
         <div className="mb-4">
           <label
-            htmlFor="type"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Type
-          </label>
-          <select
-            id="type"
-            name="type"
-            value={product.type}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
-            required
-          >
-            <option value="">Select Type</option>
-            <option value="Apple">Apple</option>
-            <option value="computer">Computer</option>
-            <option value="headphone">Headphone</option>
-            {/* Add more types as needed */}
-          </select>
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="brand"
+            htmlFor="BrandName"
             className="block text-sm font-medium text-gray-700"
           >
             Brand
           </label>
           <input
             type="text"
-            id="brand"
-            name="brand"
-            value={product.brand}
+            id="BrandName"
+            name="BrandName"
+            value={product.BrandName}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             required
@@ -132,27 +109,23 @@ const AddProduct = () => {
         {/* Type */}
         <div className="mb-4">
           <label
-            htmlFor="type"
+            htmlFor="ProductType"
             className="block text-sm font-medium text-gray-700"
           >
             Type
           </label>
           <select
-            id="type"
-            name="type"
-            value={product.type}
+            id="ProductType"
+            name="ProductType"
+            value={product.ProductType}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             required
           >
             <option value="">Select Type</option>
             <option value="Apple">Apple</option>
-            <option value="Google">Google</option>
-            <option value="Microsoft">Microsoft</option>
-            <option value="Intel">Intel</option>
-            <option value="MI">MI</option>
-            <option value="Samsung">Samsung</option>
-
+            <option value="Computer">Computer</option>
+            <option value="Headphone">Headphone</option>
             {/* Add more types as needed */}
           </select>
         </div>
@@ -160,16 +133,16 @@ const AddProduct = () => {
         {/* Price */}
         <div className="mb-4">
           <label
-            htmlFor="price"
+            htmlFor="ProductPrice"
             className="block text-sm font-medium text-gray-700"
           >
             Price
           </label>
           <input
             type="text"
-            id="price"
-            name="price"
-            value={product.price}
+            id="ProductPrice"
+            name="ProductPrice"
+            value={product.ProductPrice}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             required
@@ -179,15 +152,15 @@ const AddProduct = () => {
         {/* Short Description */}
         <div className="mb-4">
           <label
-            htmlFor="description"
+            htmlFor="ProductDescription"
             className="block text-sm font-medium text-gray-700"
           >
             Short Description
           </label>
           <textarea
-            id="description"
-            name="description"
-            value={product.description}
+            id="ProductDescription"
+            name="ProductDescription"
+            value={product.ProductDescription}
             onChange={handleChange}
             rows="3"
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
@@ -198,16 +171,16 @@ const AddProduct = () => {
         {/* Rating */}
         <div className="mb-4">
           <label
-            htmlFor="rating"
+            htmlFor="ProductRating"
             className="block text-sm font-medium text-gray-700"
           >
             Rating
           </label>
           <input
             type="text"
-            id="rating"
-            name="rating"
-            value={product.rating}
+            id="ProductRating"
+            name="ProductRating"
+            value={product.ProductRating}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             required
