@@ -19,7 +19,7 @@ const AddProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:5000/addNewProduct", {
+    fetch("https://flash-tech-server-qqznr7j8f-shafayetahmad.vercel.app/addNewProduct", {
       method: "POST",
       headers: {
         "content-type": "application/json",

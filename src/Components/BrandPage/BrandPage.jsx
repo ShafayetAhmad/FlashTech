@@ -9,7 +9,7 @@ const BrandPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/getProductByBrand?brand=${Brand}`, {
+    fetch(`https://flash-tech-server-qqznr7j8f-shafayetahmad.vercel.app/getProductByBrand?brand=${Brand}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

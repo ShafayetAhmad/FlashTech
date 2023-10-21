@@ -6,7 +6,7 @@ const BrandsGallery = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/getBrandsData", {
+    fetch("https://flash-tech-server-qqznr7j8f-shafayetahmad.vercel.app/getBrandsData", {
       method: "GET",
       headers: {
         "content-type": "application/json",
