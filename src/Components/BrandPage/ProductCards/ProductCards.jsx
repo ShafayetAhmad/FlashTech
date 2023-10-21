@@ -1,9 +1,13 @@
 /* eslint-disable react/prop-types */
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProductCards = ({ brandData, loading }) => {
   console.log(brandData);
+  const navigate = useNavigate();
+  const handleUpdateProduct = () => {
+    navigate("/");
+  };
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center bg-gray-100 p-4">
       {loading ? (
@@ -14,7 +18,7 @@ const ProductCards = ({ brandData, loading }) => {
             key={product.id}
             className="w-full p-2 transition-transform transform hover:scale-105 gap-4 bg-gray-400"
           >
-            <Link to={`brand-Product/${product.ProductName}`}>
+            <Link to={`${product._id}`}>
               <div className="rounded-lg overflow-hidden shadow-lg bg-white">
                 <img
                   src={product.ProductImage}
@@ -53,6 +57,17 @@ const ProductCards = ({ brandData, loading }) => {
                     <span className="text-xl font-bold">Rating:</span>
                     <span className="ml-2 text-xl">{`${product.ProductRating}⭐`}</span>
                   </div>
+                </div>
+                <div className="flex justify-between px-4 pb-2">
+                  <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+                    Details
+                  </button>
+                  <button
+                    className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-green-300"
+                    onClick={handleUpdateProduct}
+                  >
+                    Update
+                  </button>
                 </div>
               </div>
             </Link>
