@@ -19,9 +19,21 @@ const AddProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add your logic to handle the form submission (e.g., API call)
-    
-      console.log("Product added:", product);
-      
+
+    fetch("http://localhost:5000/addNewProduct", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+
+    console.log("Product added:", product);
+
     // Reset the form after submission
     setProduct({
       image: "",
@@ -79,6 +91,28 @@ const AddProduct = () => {
         {/* Brand */}
         <div className="mb-4">
           <label
+            htmlFor="type"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Type
+          </label>
+          <select
+            id="type"
+            name="type"
+            value={product.type}
+            onChange={handleChange}
+            className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
+            required
+          >
+            <option value="">Select Type</option>
+            <option value="Apple">Apple</option>
+            <option value="computer">Computer</option>
+            <option value="headphone">Headphone</option>
+            {/* Add more types as needed */}
+          </select>
+        </div>
+        <div className="mb-4">
+          <label
             htmlFor="brand"
             className="block text-sm font-medium text-gray-700"
           >
@@ -112,9 +146,13 @@ const AddProduct = () => {
             required
           >
             <option value="">Select Type</option>
-            <option value="phone">Phone</option>
-            <option value="computer">Computer</option>
-            <option value="headphone">Headphone</option>
+            <option value="Apple">Apple</option>
+            <option value="Google">Google</option>
+            <option value="Microsoft">Microsoft</option>
+            <option value="Intel">Intel</option>
+            <option value="MI">MI</option>
+            <option value="Samsung">Samsung</option>
+
             {/* Add more types as needed */}
           </select>
         </div>

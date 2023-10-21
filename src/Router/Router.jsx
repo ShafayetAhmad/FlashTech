@@ -6,6 +6,7 @@ import ErrorPage from "../Components/Shared/ErrorPage/ErrorPage";
 import Home from "../Components/Home/Home";
 import AddProduct from "../Components/AddProduct/AddProduct";
 import PrivateRoute from "./PrivateRoutes";
+import BrandPage from "../Components/BrandPage/BrandPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddProduct></AddProduct>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/brand-Product/:brand",
+        element: (
+          <PrivateRoute>
+            <BrandPage></BrandPage>
           </PrivateRoute>
         ),
       },
