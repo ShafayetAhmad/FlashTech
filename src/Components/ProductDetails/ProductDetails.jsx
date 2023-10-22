@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API_ROOT from "../../../config";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
+  const [userCart, setUserCart] = useState([]);
+  const [userAddedCart, setUesrAddedCart] = useState([])
+
+  const { user } = useContext(AuthContext);
 
   let paramData = useParams();
   console.log(paramData);
@@ -28,9 +33,25 @@ const ProductDetails = () => {
   }, [paramData._id]);
   console.log(product);
 
-  const handleAddToCart = () => {
-    
-  };
+  useEffect(() => {
+    fetch(`${API_ROOT}/getCartDetails?userEmail=${user.email}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setUserCart(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [user.email]);
+  
+
+  const handleAddToCart = () => {};
 
   return (
     <>
