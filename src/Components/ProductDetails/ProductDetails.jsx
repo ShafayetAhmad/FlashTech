@@ -8,7 +8,7 @@ const ProductDetails = () => {
   let paramData = useParams();
   console.log(paramData);
   useEffect(() => {
-    fetch(`https://flash-tech-server-qqznr7j8f-shafayetahmad.vercel.app/getProductDetails?id=${paramData._id}`, {
+    fetch(`https://flash-tech-server-70mpjj2c4-shafayetahmad.vercel.app/getProductDetails?id=${paramData._id}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

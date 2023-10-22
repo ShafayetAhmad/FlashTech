@@ -27,7 +27,7 @@ const RegisterUser = () => {
         const userPhotoUrl = user.photoURL;
         const newUser = { userEmail, userName, userPhotoUrl };
 
-        fetch("https://flash-tech-server-qqznr7j8f-shafayetahmad.vercel.app/addNewUser", {
+        fetch("https://flash-tech-server-70mpjj2c4-shafayetahmad.vercel.app/addNewUser", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -79,7 +79,7 @@ const RegisterUser = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        fetch("https://flash-tech-server-qqznr7j8f-shafayetahmad.vercel.app/addNewUser", {
+        fetch("https://flash-tech-server-70mpjj2c4-shafayetahmad.vercel.app/addNewUser", {
           method: "POST",
           headers: {
             "content-type": "application/json",
