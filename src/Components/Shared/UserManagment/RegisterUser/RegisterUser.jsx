@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import API_ROOT from "../../../../../config";
 import {
   faEnvelope,
   faImage,
@@ -27,7 +28,7 @@ const RegisterUser = () => {
         const userPhotoUrl = user.photoURL;
         const newUser = { userEmail, userName, userPhotoUrl };
 
-        fetch("https://flash-tech-server-70mpjj2c4-shafayetahmad.vercel.app/addNewUser", {
+        fetch(`${API_ROOT}/addNewUser`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -79,7 +80,7 @@ const RegisterUser = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        fetch("https://flash-tech-server-70mpjj2c4-shafayetahmad.vercel.app/addNewUser", {
+        fetch(`${API_ROOT}/addNewUser`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

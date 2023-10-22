@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import API_ROOT from "../../../config";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -8,7 +9,7 @@ const ProductDetails = () => {
   let paramData = useParams();
   console.log(paramData);
   useEffect(() => {
-    fetch(`https://flash-tech-server-70mpjj2c4-shafayetahmad.vercel.app/getProductDetails?id=${paramData._id}`, {
+    fetch(`${API_ROOT}/getProductDetails?id=${paramData._id}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

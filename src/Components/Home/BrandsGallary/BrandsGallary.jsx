@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import API_ROOT from "../../../../config";
 
 const BrandsGallery = () => {
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://flash-tech-server-70mpjj2c4-shafayetahmad.vercel.app/getBrandsData", {
+    fetch(`${API_ROOT}/getBrandsData` , {
       method: "GET",
       headers: {
         "content-type": "application/json",

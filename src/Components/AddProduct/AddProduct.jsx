@@ -1,4 +1,5 @@
 import { useState } from "react";
+import API_ROOT from "../../../config";
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
@@ -19,7 +20,7 @@ const AddProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("https://flash-tech-server-70mpjj2c4-shafayetahmad.vercel.app/addNewProduct", {
+    fetch(`${API_ROOT}/addNewProduct`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

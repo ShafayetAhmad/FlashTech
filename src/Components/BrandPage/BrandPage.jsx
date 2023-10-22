@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductSlider from "./ProductSlider/ProductSlider";
 import ProductCards from "./ProductCards/ProductCards";
+import API_ROOT from "../../../config";
 
 const BrandPage = () => {
   let Brand = useParams().brand;
@@ -9,7 +10,7 @@ const BrandPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://flash-tech-server-70mpjj2c4-shafayetahmad.vercel.app/getProductByBrand?brand=${Brand}`, {
+    fetch(`${API_ROOT}/getProductByBrand?brand=${Brand}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
