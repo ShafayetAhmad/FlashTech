@@ -3,6 +3,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import API_ROOT from "../../../../../config";
 
 const LoginUser = () => {
   const { logInUser } = useContext(AuthContext);
@@ -13,16 +14,36 @@ const LoginUser = () => {
 
   const handleGoogleSignIn = async () => {
     setLoginError(null);
-    try {
-      await googleLogIn();
-      console.log("Login successful");
-      console.log(location.state);
-      navigate(location?.state ? location.state : "/");
-    } catch (error) {
-      setLoginError(
-        `Invalid Email/Password. Please Enter Correctly. ${error.message}`
+    googleLogIn()
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        const userEmail = user.email;
+        const userName = user.displayName;
+        const userPhotoUrl = user.photoURL;
+
+        const newUser = { userEmail, userName, userPhotoUrl, userCart: [] };
+
+        fetch(`${API_ROOT}/addNewUser`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+
+        console.log("Login successful");
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) =>
+        setLoginError(
+          `Invalid Email/Password. Please Enter Correctly. ${error.message}`
+        )
       );
-    }
   };
 
   const handleLogin = (e) => {

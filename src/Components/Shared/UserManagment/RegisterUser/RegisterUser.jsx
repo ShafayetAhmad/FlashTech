@@ -26,7 +26,7 @@ const RegisterUser = () => {
         const userEmail = user.email;
         const userName = user.displayName;
         const userPhotoUrl = user.photoURL;
-        const newUser = { userEmail, userName, userPhotoUrl };
+        const newUser = { userEmail, userName, userPhotoUrl, userCart: [] };
 
         fetch(`${API_ROOT}/addNewUser`, {
           method: "POST",
@@ -57,7 +57,7 @@ const RegisterUser = () => {
     const userName = form.get("name");
     const userPhotoUrl = form.get("photoUrl");
     const userPassword = form.get("password");
-    const newUser = { userEmail, userName, userPhotoUrl };
+    const newUser = { userEmail, userName, userPhotoUrl, userCart: [] };
 
     if (userPassword.length < 6) {
       setPasswordError("Password must be at least 6 characters long");

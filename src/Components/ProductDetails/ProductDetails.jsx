@@ -28,6 +28,10 @@ const ProductDetails = () => {
   }, [paramData._id]);
   console.log(product);
 
+  const handleAddToCart = () => {
+    
+  };
+
   return (
     <>
       {loading ? (
@@ -70,12 +74,12 @@ const ProductDetails = () => {
             <p className="text-gray-700 mb-4">{product.ProductDescription}</p>
 
             {/* Buttons */}
-            <div className="flex justify-between">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
-                Details
-              </button>
-              <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-green-300">
-                Update
+            <div className="flex ">
+              <button
+                className="flex-1 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+                onClick={handleAddToCart}
+              >
+                Add to Cart
               </button>
             </div>
           </div>
