@@ -5,42 +5,42 @@ const Testimonials = () => {
   const testimonialsData = [
     {
       content:
-        "“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus bibendum odio, non volutpat enim. Vivamus nec libero vel justo cursus dictum.”",
+        "“Amazing products and top-notch quality! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus bibendum odio, non volutpat enim. Vivamus nec libero vel justo cursus dictum.”",
       author: "John Doe",
-      role: "CEO, TechCorp",
+      role: "Happy Customer",
     },
     {
       content:
-        "“Sed vel mauris eu lacus hendrerit posuere. Sed id libero at purus vestibulum consectetur nec in nisl. Suspendisse potenti.”",
+        "“Exceptional service and innovation! Sed vel mauris eu lacus hendrerit posuere. Sed id libero at purus vestibulum consectetur nec in nisl. Suspendisse potenti.”",
       author: "Jane Smith",
-      role: "Marketing Manager, Innovate Solutions",
+      role: "Satisfied Client",
     },
     {
       content:
-        "“Pellentesque aliquet nisl a neque finibus, nec fermentum dolor efficitur. Curabitur nec augue eu turpis tincidunt fermentum.”",
+        "“Outstanding technology and support! Pellentesque aliquet nisl a neque finibus, nec fermentum dolor efficitur. Curabitur nec augue eu turpis tincidunt fermentum.”",
       author: "David Johnson",
-      role: "CTO, Digital Ventures",
+      role: "Impressed Customer",
     },
     {
       content:
-        "“Donec tincidunt auctor enim, nec aliquet tellus feugiat in. Vestibulum eu justo sed ex rhoncus volutpat vel at nisi.”",
+        "“Best experience ever! Donec tincidunt auctor enim, nec aliquet tellus feugiat in. Vestibulum eu justo sed ex rhoncus volutpat vel at nisi.”",
       author: "Emily Wilson",
-      role: "Product Manager, Quantum Innovations",
+      role: "Loyal User",
     },
     {
       content:
-        "“Integer vitae commodo ligula. Phasellus bibendum sem in lectus dignissim, et facilisis quam egestas. Aenean scelerisque metus ut libero lobortis, in bibendum justo facilisis.”",
+        "“Incredible products and excellent support! Integer vitae commodo ligula. Phasellus bibendum sem in lectus dignissim, et facilisis quam egestas. Aenean scelerisque metus ut libero lobortis, in bibendum justo facilisis.”",
       author: "Alex Turner",
-      role: "Lead Developer, CodeCrafters",
+      role: "Satisfied Developer",
     },
-    // Add more testimonials as needed
+    // Add more positive testimonials as needed
   ];
 
   return (
     <section>
-      <div className="mx-auto max-w-5xl px-5 py-4 md:px-10 ">
-        <div className="mx-auto mb-6 flex max-w-3xl flex-col text-center "></div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 ">
+      <div className="mx-auto max-w-5xl px-5 py-4 md:px-10">
+        <div className="mx-auto mb-6 flex max-w-3xl flex-col text-center"></div>
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
           {testimonialsData.map((testimonial, index) => (
             <div
               key={index}
