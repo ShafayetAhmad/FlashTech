@@ -7,7 +7,7 @@ const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const [userCart, setUserCart] = useState([]);
-  const [userAddedCart, setUesrAddedCart] = useState([])
+  const [userAddedCart, setUesrAddedCart] = useState([]);
 
   const { user } = useContext(AuthContext);
 
@@ -49,9 +49,21 @@ const ProductDetails = () => {
         console.error("Error fetching data:", error);
       });
   }, [user.email]);
-  
 
-  const handleAddToCart = () => {};
+  console.log(userCart);
+  const handleAddToCart = () => {
+    const newCart = [...userCart, paramData._id];
+    setUserCart(newCart);
+    fetch("", {})
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setUserCart(newCart);
+      })
+      .catch((error) => {
+        console.log("error in adding to cart: ", error);
+      });
+  };
 
   return (
     <>
