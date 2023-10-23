@@ -1,8 +1,11 @@
 import { useState } from "react";
 import API_ROOT from "../../../config";
+import { useParams } from "react-router-dom";
 
-const AddProduct = () => {
-  const [product, setProduct] = useState({
+const UpdateProduct = () => {
+  const productId = useParams().id;
+  const [previousProductData, setPreviousProductData] = useState({});
+  const [updatedProduct, setUpdatedProduct] = useState({
     ProductImage: "",
     ProductName: "",
     BrandName: "",
@@ -14,28 +17,35 @@ const AddProduct = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
+    setUpdatedProduct({ ...updatedProduct, [name]: value });
   };
+
+  fetch(`${API_ROOT}/getProductDetails?id=${productId}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      setPreviousProductData(data);
+    });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`${API_ROOT}/addNewProduct`, {
-      method: "POST",
+    fetch(`${API_ROOT}/updateProduct`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(product),
+      body: JSON.stringify({ productId, updatedProduct }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
       });
 
-    console.log("Product added:", product);
+    console.log("Product updated:", updatedProduct);
 
     // Reset the form after submission
-    setProduct({
+    setUpdatedProduct({
       ProductImage: "",
       ProductName: "",
       BrandName: "",
@@ -48,7 +58,7 @@ const AddProduct = () => {
 
   return (
     <div className="max-w-md mx-auto mt-8 p-4 bg-gray-100 rounded-md shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Add Product</h2>
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">Update Product</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
@@ -58,10 +68,11 @@ const AddProduct = () => {
             Image URL
           </label>
           <input
+            placeholder={previousProductData.ProductImage}
             type="text"
             id="ProductImage"
             name="ProductImage"
-            value={product.ProductImage}
+            value={updatedProduct.ProductImage}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             required
@@ -76,10 +87,11 @@ const AddProduct = () => {
             Name
           </label>
           <input
+            placeholder={previousProductData.ProductName}
             type="text"
             id="ProductName"
             name="ProductName"
-            value={product.ProductName}
+            value={updatedProduct.ProductName}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             required
@@ -94,10 +106,11 @@ const AddProduct = () => {
             Product Type
           </label>
           <input
+            placeholder={previousProductData.ProductType}
             type="text"
             id="ProductType"
             name="ProductType"
-            value={product.ProductType}
+            value={updatedProduct.ProductType}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             required
@@ -112,10 +125,11 @@ const AddProduct = () => {
             Type
           </label>
           <select
+            placeholder={previousProductData.BrandName}
             type="text"
             id="BrandName"
             name="BrandName"
-            value={product.BrandName}
+            value={updatedProduct.BrandName}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             required
@@ -141,9 +155,10 @@ const AddProduct = () => {
             type="text"
             id="ProductPrice"
             name="ProductPrice"
-            value={product.ProductPrice}
+            value={updatedProduct.ProductPrice}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
+            placeholder={previousProductData.ProductPrice}
             required
           />
         </div>
@@ -158,10 +173,11 @@ const AddProduct = () => {
           <textarea
             id="ProductDescription"
             name="ProductDescription"
-            value={product.ProductDescription}
+            value={updatedProduct.ProductDescription}
             onChange={handleChange}
             rows="3"
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
+            placeholder={previousProductData.ProductDescription}
             required
           ></textarea>
         </div>
@@ -176,7 +192,7 @@ const AddProduct = () => {
           <input
             id="ProductRating"
             name="ProductRating"
-            value={product.ProductRating}
+            value={updatedProduct.ProductRating}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             required
@@ -187,11 +203,11 @@ const AddProduct = () => {
           type="submit"
           className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
         >
-          Add Product
+          Update Product
         </button>
       </form>
     </div>
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;
