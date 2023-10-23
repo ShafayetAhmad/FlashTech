@@ -1,15 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import API_ROOT from "../../../../../config";
 import { AuthContext } from "../../../Provider/AuthProvider";
-import { Link } from "react-router-dom";
-
 const MyCart = () => {
   const { user } = useContext(AuthContext);
   const [cartData, setCartData] = useState([]);
   const [loading, setLoading] = useState(true);
   console.log(user);
   useEffect(() => {
-    console.log(user.email)
+    console.log(user.email);
     fetch(`${API_ROOT}/getCartData?userEmail=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
@@ -23,6 +21,31 @@ const MyCart = () => {
       });
   }, [setCartData, user]);
 
+  const handleRemoveFromCart = (productId) => {
+    console.log(productId);
+    fetch(`${API_ROOT}/deleteCardData`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        userEmail: user.email,
+        productId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+
+        setCartData((prevCartData) =>
+          prevCartData.filter((item) => item._id !== productId)
+        );
+      })
+      .catch((error) => {
+        console.log("error in deleting cart element: ", error);
+      });
+  };
+
   return (
     <div>
       <h1>{cartData.length}</h1>
@@ -35,13 +58,14 @@ const MyCart = () => {
               key={product._id} // Assuming _id is the correct identifier for each product
               className="w-full p-2 transition-transform transform hover:scale-105 gap-4 bg-gray-400"
             >
-              <Link to={`${product._id}`}>
+              <div>
                 <div className="rounded-lg overflow-hidden shadow-lg bg-white">
                   <img
                     src={product.ProductImage}
                     alt={product.ProductName}
                     className="w-full h-48 object-cover"
                   />
+
                   <div className="p-4">
                     <div className="mb-2">
                       <span className="text-xl font-bold">Product:</span>
@@ -80,9 +104,17 @@ const MyCart = () => {
                       <span className="text-xl font-bold">Rating:</span>
                       <span className="ml-2 text-xl">{`${product.ProductRating}⭐`}</span>
                     </div>
+                    <div className="flex ">
+                      <button
+                        className="flex-1 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300"
+                        onClick={() => handleRemoveFromCart(product._id)}
+                      >
+                        Remove From Cart
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </Link>
+              </div>
             </div>
           ))
         )}

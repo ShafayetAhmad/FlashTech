@@ -32,21 +32,20 @@ const ProductDetails = () => {
       });
   }, [paramData._id]);
 
-    useEffect(() => {
-      console.log(user.email);
-      fetch(`${API_ROOT}/getCartData?userEmail=${user.email}`)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setUserCart(data);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-    }, [user.email]);
+  useEffect(() => {
+    console.log(user.email);
+    fetch(`${API_ROOT}/getCartData?userEmail=${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setUserCart(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [user.email]);
 
   const handleAddToCart = () => {
-
     fetch(`${API_ROOT}/updateUserCart`, {
       method: "PUT",
       headers: {
@@ -65,11 +64,7 @@ const ProductDetails = () => {
       .catch((error) => {
         console.log("error in adding to cart: ", error);
       });
-
-    console.log(userCart);
   };
-
-
 
   return (
     <>
