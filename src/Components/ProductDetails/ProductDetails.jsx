@@ -4,12 +4,12 @@ import API_ROOT from "../../../config";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const ProductDetails = () => {
-  const [product, setProduct] = useState({});
+  const [currentProduct, setCurrentProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const [userCart, setUserCart] = useState([]);
-  const [userAddedCart, setUesrAddedCart] = useState([]);
 
   const { user } = useContext(AuthContext);
+  console.log(user);
 
   let paramData = useParams();
   console.log(paramData);
@@ -23,7 +23,7 @@ const ProductDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setProduct(data);
+        setCurrentProduct(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -31,39 +31,45 @@ const ProductDetails = () => {
         setLoading(false);
       });
   }, [paramData._id]);
-  console.log(product);
 
-  useEffect(() => {
-    fetch(`${API_ROOT}/getCartDetails?userEmail=${user.email}`, {
-      method: "GET",
+    useEffect(() => {
+      console.log(user.email);
+      fetch(`${API_ROOT}/getCartData?userEmail=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setUserCart(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    }, [user.email]);
+
+  const handleAddToCart = () => {
+
+    fetch(`${API_ROOT}/updateUserCart`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
+      body: JSON.stringify({
+        userEmail: user.email,
+        currentProduct,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setUserCart(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, [user.email]);
-
-  console.log(userCart);
-  const handleAddToCart = () => {
-    const newCart = [...userCart, paramData._id];
-    setUserCart(newCart);
-    fetch("", {})
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setUserCart(newCart);
+        console.log(userCart);
       })
       .catch((error) => {
         console.log("error in adding to cart: ", error);
       });
+
+    console.log(userCart);
   };
+
+
 
   return (
     <>
@@ -74,37 +80,39 @@ const ProductDetails = () => {
           {/* Image */}
           <img
             className="w-full h-48 object-cover object-center"
-            src={product.ProductImage}
-            alt={product.ProductName}
+            src={currentProduct.ProductImage}
+            alt={currentProduct.ProductName}
           />
 
           {/* Product Details */}
           <div className="p-6">
             {/* Name */}
             <h2 className="text-xl font-semibold mb-2">
-              {product.ProductName}
+              {currentProduct.ProductName}
             </h2>
 
             {/* Brand Name */}
-            <p className="text-gray-600 mb-4">{`Brand: ${product.BrandName}`}</p>
+            <p className="text-gray-600 mb-4">{`Brand: ${currentProduct.BrandName}`}</p>
 
             {/* Type */}
-            <p className="text-gray-600 mb-4">{`Type: ${product.ProductType}`}</p>
+            <p className="text-gray-600 mb-4">{`Type: ${currentProduct.ProductType}`}</p>
 
             {/* Price */}
-            <p className="text-gray-800 font-bold text-xl mb-4">{`Price: ${product.ProductPrice}`}</p>
+            <p className="text-gray-800 font-bold text-xl mb-4">{`Price: ${currentProduct.ProductPrice}`}</p>
 
             {/* Rating */}
             <div className="flex items-center mb-4">
               <p className="text-gray-600">Rating:</p>
               <div className="ml-2 text-yellow-500">
                 {" "}
-                {product.ProductRating}⭐
+                {currentProduct.ProductRating}⭐
               </div>
             </div>
 
             {/* Product Description */}
-            <p className="text-gray-700 mb-4">{product.ProductDescription}</p>
+            <p className="text-gray-700 mb-4">
+              {currentProduct.ProductDescription}
+            </p>
 
             {/* Buttons */}
             <div className="flex ">
