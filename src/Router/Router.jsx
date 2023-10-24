@@ -39,18 +39,12 @@ const router = createBrowserRouter([
       {
         path: "/brand-Product/:brand",
         element: (
-          <PrivateRoute>
             <BrandPage></BrandPage>
-          </PrivateRoute>
         ),
       },
       {
         path: "/brand-Product/:brand/:_id",
-        element: (
-          <PrivateRoute>
-            <ProductDetails></ProductDetails>
-          </PrivateRoute>
-        ),
+        element: <ProductDetails></ProductDetails>,
       },
       {
         path: "/my-cart",

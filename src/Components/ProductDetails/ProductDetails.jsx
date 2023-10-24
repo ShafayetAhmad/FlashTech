@@ -62,7 +62,7 @@ const ProductDetails = () => {
         console.log(userCart);
       })
       .catch((error) => {
-        console.log("error in adding to cart: ", error);
+        console.error("Error in adding to cart: ", error);
       });
   };
 
@@ -71,52 +71,54 @@ const ProductDetails = () => {
       {loading ? (
         <p className="text-center text-gray-500">Loading...</p>
       ) : (
-        <div className="max-w-md mx-auto bg-white rounded-xl overflow-hidden shadow-md">
-          {/* Image */}
+        <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center">
+          {/* Product Image */}
           <img
-            className="w-full h-48 object-cover object-center"
+            className="w-full h-48 object-cover object-center lg:w-1/2 lg:h-auto lg:rounded-l-xl"
             src={currentProduct.ProductImage}
             alt={currentProduct.ProductName}
           />
 
           {/* Product Details */}
-          <div className="p-6">
-            {/* Name */}
-            <h2 className="text-xl font-semibold mb-2">
-              {currentProduct.ProductName}
-            </h2>
+          <div className="max-w-md mx-auto bg-white rounded-xl overflow-hidden shadow-md lg:w-1/2 lg:rounded-r-xl">
+            <div className="p-6">
+              {/* Name */}
+              <h2 className="text-xl font-semibold mb-2">
+                {currentProduct.ProductName}
+              </h2>
 
-            {/* Brand Name */}
-            <p className="text-gray-600 mb-4">{`Brand: ${currentProduct.BrandName}`}</p>
+              {/* Brand Name */}
+              <p className="text-gray-600 mb-4">{`Brand: ${currentProduct.BrandName}`}</p>
 
-            {/* Type */}
-            <p className="text-gray-600 mb-4">{`Type: ${currentProduct.ProductType}`}</p>
+              {/* Type */}
+              <p className="text-gray-600 mb-4">{`Type: ${currentProduct.ProductType}`}</p>
 
-            {/* Price */}
-            <p className="text-gray-800 font-bold text-xl mb-4">{`Price: ${currentProduct.ProductPrice}`}</p>
+              {/* Price */}
+              <p className="text-gray-800 font-bold text-xl mb-4">{`Price: ${currentProduct.ProductPrice}`}</p>
 
-            {/* Rating */}
-            <div className="flex items-center mb-4">
-              <p className="text-gray-600">Rating:</p>
-              <div className="ml-2 text-yellow-500">
-                {" "}
-                {currentProduct.ProductRating}⭐
+              {/* Rating */}
+              <div className="flex items-center mb-4">
+                <p className="text-gray-600">Rating:</p>
+                <div className="ml-2 text-yellow-500">
+                  {" "}
+                  {currentProduct.ProductRating}⭐
+                </div>
               </div>
-            </div>
 
-            {/* Product Description */}
-            <p className="text-gray-700 mb-4">
-              {currentProduct.ProductDescription}
-            </p>
+              {/* Product Description */}
+              <p className="text-gray-700 mb-4">
+                {currentProduct.ProductDescription}
+              </p>
 
-            {/* Buttons */}
-            <div className="flex ">
-              <button
-                className="flex-1 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-                onClick={handleAddToCart}
-              >
-                Add to Cart
-              </button>
+              {/* Button */}
+              <div className="flex">
+                <button
+                  className="flex-1 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+                  onClick={handleAddToCart}
+                >
+                  Add to Cart
+                </button>
+              </div>
             </div>
           </div>
         </div>
