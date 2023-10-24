@@ -39,17 +39,16 @@ const LoginUser = () => {
         console.log("Login successful");
         navigate(location?.state ? location.state : "/");
       })
-      .catch((error) =>
-        setLoginError(
-          `Invalid Email/Password. Please Enter Correctly. ${error.message}`
-        )
-      );
+      .catch((error) => {
+        setLoginError(`Invalid Email/Password. Please Enter Correctly. `);
+        console.log(error.message);
+      });
   };
 
   const handleLogin = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    const userEmail = form.get("email");
+    const userEmail = form.get("email").toLocaleLowerCase();
     const userPassword = form.get("password");
 
     logInUser(userEmail, userPassword)
@@ -62,6 +61,9 @@ const LoginUser = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        setLoginError(
+          `Invalid Email/Password. Please enter correct credentials. ${errorMessage}`
+        );
       });
   };
 
@@ -99,7 +101,7 @@ const LoginUser = () => {
             </div>
             {loginError && (
               <div className="form-control mb-4">
-                <p className="text-lg text-error">{loginError}</p>
+                <p className="text-lg text-red-500">{loginError}</p>
               </div>
             )}
             <form
@@ -130,8 +132,7 @@ const LoginUser = () => {
                 />
                 <input
                   type="password"
-                  className="mb-4 block h-9 w-full border border-black bg-white px-3 py-6 pl-14 text-sm text-[#333333]
-                   "
+                  className="mb-4 block h-9 w-full border border-black bg-white px-3 py-6 pl-14 text-sm text-[#333333]"
                   name="password"
                   placeholder="Password "
                   required=""

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API_ROOT from "../../../config";
 import { AuthContext } from "../Provider/AuthProvider";
+import swal from "sweetalert";
 
 const ProductDetails = () => {
   const [currentProduct, setCurrentProduct] = useState({});
@@ -60,6 +61,12 @@ const ProductDetails = () => {
       .then((data) => {
         console.log(data);
         console.log(userCart);
+        swal({
+          title: "Success",
+          text: "Added to Cart Succesfully",
+          icon: "success",
+          button: "Okay",
+        });
       })
       .catch((error) => {
         console.error("Error in adding to cart: ", error);
@@ -72,31 +79,26 @@ const ProductDetails = () => {
         <p className="text-center text-gray-500">Loading...</p>
       ) : (
         <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center">
-          {/* Product Image */}
+     
           <img
-            className="w-full h-48 object-cover object-center lg:w-1/2 lg:h-auto lg:rounded-l-xl"
+            className="w-full h-48 object-cover object-center lg:w-96 lg:h-auto lg:mx-auto lg:rounded-l-xl"
             src={currentProduct.ProductImage}
             alt={currentProduct.ProductName}
           />
 
-          {/* Product Details */}
           <div className="max-w-md mx-auto bg-white rounded-xl overflow-hidden shadow-md lg:w-1/2 lg:rounded-r-xl">
             <div className="p-6">
-              {/* Name */}
+           
               <h2 className="text-xl font-semibold mb-2">
                 {currentProduct.ProductName}
               </h2>
 
-              {/* Brand Name */}
               <p className="text-gray-600 mb-4">{`Brand: ${currentProduct.BrandName}`}</p>
 
-              {/* Type */}
               <p className="text-gray-600 mb-4">{`Type: ${currentProduct.ProductType}`}</p>
 
-              {/* Price */}
               <p className="text-gray-800 font-bold text-xl mb-4">{`Price: ${currentProduct.ProductPrice}`}</p>
 
-              {/* Rating */}
               <div className="flex items-center mb-4">
                 <p className="text-gray-600">Rating:</p>
                 <div className="ml-2 text-yellow-500">
@@ -105,12 +107,10 @@ const ProductDetails = () => {
                 </div>
               </div>
 
-              {/* Product Description */}
               <p className="text-gray-700 mb-4">
                 {currentProduct.ProductDescription}
               </p>
 
-              {/* Button */}
               <div className="flex">
                 <button
                   className="flex-1 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"

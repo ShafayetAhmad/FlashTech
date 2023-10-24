@@ -53,7 +53,7 @@ const RegisterUser = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    const userEmail = form.get("email");
+    const userEmail = form.get("email").toLocaleLowerCase();
     const userName = form.get("name");
     const userPhotoUrl = form.get("photoUrl");
     const userPassword = form.get("password");

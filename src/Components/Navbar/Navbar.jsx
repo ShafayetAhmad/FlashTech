@@ -83,28 +83,7 @@ const Navbar = () => {
                 />
               </div>
             </label>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <NavLink to="/profile" className="text-xl justify-between">
-                  Profile
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/settings" className="text-xl justify-between">
-                  Settings
-                </NavLink>
-              </li>
-              <li>
-                <button onClick={handleSignOut}>
-                  <NavLink to="/" className="text-xl justify-between">
-                    Logout
-                  </NavLink>
-                </button>
-              </li>
-            </ul>
+            
           </div>
         </div>
       ) : (

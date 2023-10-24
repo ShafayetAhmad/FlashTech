@@ -122,7 +122,7 @@ const UpdateProduct = () => {
             htmlFor="BrandName"
             className="block text-sm font-medium text-gray-700"
           >
-            Type
+            Brand
           </label>
           <select
             placeholder={previousProductData.BrandName}
@@ -134,7 +134,7 @@ const UpdateProduct = () => {
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             required
           >
-            <option value="">Select Type</option>
+            <option value="">Select Brand</option>
             <option value="Apple">Apple</option>
             <option value="Google">Google</option>
             <option value="Microsoft">Microsoft</option>
